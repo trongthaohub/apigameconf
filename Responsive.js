@@ -8,7 +8,7 @@
         "name": "Tập sự gieo hạt",
         "code": "tap_su_gieo_hat",
         "icon": "https://file.gamee.vn/1733883711457_Tập sự  gieo hạt.png",
-        "yourScore": 270,
+        "yourScore": 1000,
         "rankScore": 0,
         "rankConfigs": [
             {
