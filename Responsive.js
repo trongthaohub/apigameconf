@@ -9,7 +9,7 @@
         "code": "tap_su_gieo_hat",
         "icon": "https://file.gamee.vn/1733883711457_Tập sự  gieo hạt.png",
         "yourScore": 1000,
-        "rankScore": 0,
+        "rankScore": 2,
         "rankConfigs": [
             {
                 "id": 14,
