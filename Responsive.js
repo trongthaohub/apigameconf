@@ -1,20 +1,33 @@
 // FakeResponsive.js
 console.log("[FakeResponsive] Intercepted: " + $request.url);
 
+function formatTimestamp9(d) {
+    const pad = (n, w = 2) => String(n).padStart(w, '0');
+    const year = d.getFullYear();
+    const month = pad(d.getMonth() + 1);
+    const day = pad(d.getDate());
+    const hours = pad(d.getHours());
+    const minutes = pad(d.getMinutes());
+    const seconds = pad(d.getSeconds());
+    const millis = String(d.getMilliseconds()).padStart(3, '0');
+    const fraction = millis + '000000'; // 9 chữ số phần giây
+    return `${year}-${month}-${day}T${hours}:${minutes}:${seconds}.${fraction}`;
+}
+
+
 const fakeData = {
-   "timestamp": "2025-08-10T08:33:21.721612386",
+    "timestamp": formatTimestamp9(new Date()),
     "traceId": "31ccd670-4871-4b63-9df9-3bd19add3cef",
     "code": "success",
     "message": "0000",
     "data": {
         "id": null,
-        "name": "Tập sự gieo hạt",
-        "code": "tap_su_gieo_hat",
-        "icon": "https://file.gamee.vn/1733883711457_Tập sự  gieo hạt.png",
-        "yourScore": 1000,
-        "rankScore": 2,
-        "rankConfigs": [
-            {
+        "name": "Bậc thầy đồng áng",
+        "code": "bac_thay_dong_ang",
+        "icon": "https://file.gamee.vn/da5965599-rank_4.png",
+        "yourScore": 37300,
+        "rankScore": 15,
+        "rankConfigs": [{
                 "id": 14,
                 "name": "Tập sự gieo hạt",
                 "code": "tap_su_gieo_hat",
@@ -33,17 +46,15 @@ const fakeData = {
                 "fromLevel": 3,
                 "toLevel": 6,
                 "requiredTotalExp": 3400,
-                "rankAwards": [
-                    {
-                        "id": 51,
-                        "awardType": {
-                            "id": 4,
-                            "name": "Khung avatar"
-                        },
-                        "quantity": 1,
-                        "image": "https://file.gamee.vn/1734924793704_avatar_2.png"
-                    }
-                ],
+                "rankAwards": [{
+                    "id": 51,
+                    "awardType": {
+                        "id": 4,
+                        "name": "Khung avatar"
+                    },
+                    "quantity": 1,
+                    "image": "https://file.gamee.vn/1734924793704_avatar_2.png"
+                }],
                 "receivingStatus": 1
             },
             {
@@ -54,8 +65,7 @@ const fakeData = {
                 "fromLevel": 7,
                 "toLevel": 10,
                 "requiredTotalExp": 11300,
-                "rankAwards": [
-                    {
+                "rankAwards": [{
                         "id": 40,
                         "awardType": {
                             "id": 1,
@@ -84,8 +94,7 @@ const fakeData = {
                 "fromLevel": 11,
                 "toLevel": 15,
                 "requiredTotalExp": 37300,
-                "rankAwards": [
-                    {
+                "rankAwards": [{
                         "id": 42,
                         "awardType": {
                             "id": 1,
@@ -123,8 +132,7 @@ const fakeData = {
                 "fromLevel": 16,
                 "toLevel": 21,
                 "requiredTotalExp": 167000,
-                "rankAwards": [
-                    {
+                "rankAwards": [{
                         "id": 45,
                         "awardType": {
                             "id": 1,
@@ -162,8 +170,7 @@ const fakeData = {
                 "fromLevel": 22,
                 "toLevel": 26,
                 "requiredTotalExp": 1020000,
-                "rankAwards": [
-                    {
+                "rankAwards": [{
                         "id": 49,
                         "awardType": {
                             "id": 2,
@@ -198,9 +205,9 @@ const fakeData = {
 };
 
 $done({
-  status: 200,
-  headers: {
-    "Content-Type": "application/json"
-  },
-  body: JSON.stringify(fakeData)
+    status: 200,
+    headers: {
+        "Content-Type": "application/json"
+    },
+    body: JSON.stringify(fakeData)
 });
