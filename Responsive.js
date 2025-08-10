@@ -41,7 +41,7 @@
                         "image": "https://file.gamee.vn/1734924793704_avatar_2.png"
                     }
                 ],
-                "receivingStatus": 0
+                "receivingStatus": 1
             },
             {
                 "id": 26,
@@ -71,7 +71,7 @@
                         "image": "https://file.gamee.vn/1734924876608_avatar_4.png"
                     }
                 ],
-                "receivingStatus": 0
+                "receivingStatus": 1
             },
             {
                 "id": 27,
@@ -110,7 +110,7 @@
                         "image": "https://file.gamee.vn/1733890016264_giamgia2.jpg"
                     }
                 ],
-                "receivingStatus": 0
+                "receivingStatus": 1
             },
             {
                 "id": 28,
