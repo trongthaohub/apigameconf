@@ -14,19 +14,27 @@ function formatTimestamp9(d) {
     return `${year}-${month}-${day}T${hours}:${minutes}:${seconds}.${fraction}`;
 }
 
+function uuidv4() {
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+        const r = Math.random() * 16 | 0;
+        const v = c === 'x' ? r : (r & 0x3 | 0x8);
+        return v.toString(16);
+    });
+}
+
 
 const fakeData = {
     "timestamp": formatTimestamp9(new Date()),
-    "traceId": "31ccd670-4871-4b63-9df9-3bd19add3cef",
+    "traceId": uuidv4(),
     "code": "success",
     "message": "0000",
     "data": {
         "id": null,
-        "name": "Bậc thầy đồng áng",
-        "code": "bac_thay_dong_ang",
-        "icon": "https://file.gamee.vn/da5965599-rank_4.png",
-        "yourScore": 37300,
-        "rankScore": 15,
+        "name": "Đệ nhất Đại Phú",
+        "code": "de_nhat_dai_phu",
+        "icon": "https://file.gamee.vn/546dc899d-rank_6.png",
+        "yourScore": 1020000,
+        "rankScore": 26,
         "rankConfigs": [{
                 "id": 14,
                 "name": "Tập sự gieo hạt",
@@ -55,7 +63,7 @@ const fakeData = {
                     "quantity": 1,
                     "image": "https://file.gamee.vn/1734924793704_avatar_2.png"
                 }],
-                "receivingStatus": 1
+                "receivingStatus": 0
             },
             {
                 "id": 26,
@@ -84,7 +92,7 @@ const fakeData = {
                         "image": "https://file.gamee.vn/1734924876608_avatar_4.png"
                     }
                 ],
-                "receivingStatus": 1
+                "receivingStatus": 0
             },
             {
                 "id": 27,
@@ -122,7 +130,7 @@ const fakeData = {
                         "image": "https://file.gamee.vn/1733890016264_giamgia2.jpg"
                     }
                 ],
-                "receivingStatus": 1
+                "receivingStatus": 0
             },
             {
                 "id": 28,
@@ -198,11 +206,35 @@ const fakeData = {
                         "image": "https://file.gamee.vn/1734497615448_exp.svg"
                     }
                 ],
-                "receivingStatus": 0
+                "receivingStatus": 1
             }
         ]
     }
 };
+
+// Tự động tính yourScore và rankScore theo requiredTotalExp của rank đang đạt (receivingStatus = 1)
+(function() {
+    try {
+        const data = fakeData && fakeData.data;
+        if (data && Array.isArray(data.rankConfigs)) {
+            const ranks = data.rankConfigs;
+            const achieved = ranks.filter(r => r && r.receivingStatus === 1);
+            let current = null;
+            if (achieved.length) {
+                // Chọn rank có toLevel cao nhất trong các rank đã đạt
+                current = achieved.sort((a, b) => (a.toLevel || 0) - (b.toLevel || 0)).pop();
+            }
+            if (!current) {
+                // Nếu chưa có rank nào đạt, mặc định lấy rank đầu tiên
+                current = ranks[0];
+            }
+            data.rankScore = (current && typeof current.toLevel === 'number') ? current.toLevel : 0;
+            data.yourScore = (current && typeof current.requiredTotalExp === 'number') ? current.requiredTotalExp : 0;
+        }
+    } catch (e) {
+        console.log('Auto-score compute error:', e);
+    }
+})();
 
 $done({
     status: 200,
